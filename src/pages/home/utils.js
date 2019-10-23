@@ -19,3 +19,14 @@ export const getSelectedSeats = (showId, seats) => {
 
   return { [showId]: selectedSeats };
 };
+
+export const getSoldSeats = seatsMap => {
+  const soldSeats = {};
+  Object.keys(seatsMap).forEach(showId => {
+    soldSeats[showId] = seatsMap[showId]
+      .filter(seat => !seat.isAvailable)
+      .map(seat => seat.seatId);
+  });
+
+  return soldSeats;
+};

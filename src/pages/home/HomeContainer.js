@@ -6,9 +6,10 @@ import { seatsDetail } from "../../data/Data";
 // State container for the application
 const HomeContainer = () => {
   const [showBookModal, setShowBookModal] = useState(false);
+  const [showRevenueModal, setShowRevenueModal] = useState(false);
   const [seatsMap, setSeatsMap] = useState(buildSeatsMap(seatsDetail));
 
-  const handleOpen = () => {
+  const handleBookModalOpen = () => {
     setShowBookModal(true);
   };
 
@@ -16,8 +17,20 @@ const HomeContainer = () => {
     setShowBookModal(false);
   };
 
+  const handleRevenueModalOpen = () => {
+    setShowRevenueModal(true);
+  };
+
+  const handleRevenueModalClose = () => {
+    setShowRevenueModal(false);
+  };
+
   const handleBookButtonClick = () => {
-    handleOpen(true);
+    handleBookModalOpen();
+  };
+
+  const handleRevenueButtonClick = () => {
+    handleRevenueModalOpen();
   };
 
   const handleSeatSelection = (seatId, showId) => {
@@ -56,10 +69,12 @@ const HomeContainer = () => {
   return (
     <Home
       onBookButtonClick={handleBookButtonClick}
-      //onInvoiceButtonClick={handleInvoiceButtonClick}
+      onRevenueButtonClick={handleRevenueButtonClick}
       seatsMap={seatsMap}
       showBookModal={showBookModal}
+      showRevenueModal={showRevenueModal}
       onCloseBookModal={handleBookModalClose}
+      onCloseRevenueModal={handleRevenueModalClose}
       onSeatSelection={handleSeatSelection}
       onSelectedSeatSubmit={handleSelectedSeatSubmit}
       onReceiptClose={handleReceiptClose}

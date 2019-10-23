@@ -1,6 +1,7 @@
 import React from "react";
 import CustomCard from "../customCard/CustomCard";
 import CustomButton from "../customButton/CustomButton";
+import Customcheckbox from "../customCheckbox/CustomCheckbox";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { getSelectedSeats } from "../../pages/home/utils";
@@ -12,7 +13,8 @@ const CustomSeats = ({
   show,
   onSeatSelection,
   onSelectedSeatSubmit,
-  onShowReceiptView
+  onShowReceiptView,
+  ...props
 }) => {
   const handleSubmit = () => {
     onSelectedSeatSubmit(show);
@@ -28,13 +30,14 @@ const CustomSeats = ({
       title={show}
       footerContent={footerContent}
       selectable={selectable}
+      {...props}
     >
       {/* FIXME */}
       <Form>
         <div>
           {seats.map(seat => {
             return (
-              <Form.Check
+              <Customcheckbox
                 inline
                 type="checkbox"
                 label={seat.seatId}

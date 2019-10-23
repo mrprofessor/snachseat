@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomModal from "../../shared/customModal/CustomModal";
 import CustomSeats from "../../shared/customSeats/CustomSeats";
 import { getTotalAvailableSeatNumber } from "../../pages/home/utils";
@@ -54,6 +54,7 @@ const BookingForm = ({
                   selectedShow
                 )}`}
                 onShowReceiptView={onShowReceiptView}
+                border="info"
               />
             )}
           </Row>

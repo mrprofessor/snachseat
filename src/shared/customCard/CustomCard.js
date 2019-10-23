@@ -2,11 +2,17 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import "./customCard.scss";
 
-const CustomCard = ({ children, title, footerContent, selectable }) => {
+const CustomCard = ({
+  children,
+  title,
+  footerContent,
+  selectable,
+  ...props
+}) => {
   const classNames = selectable ? "customCard" : "customCard unClickable";
 
   return (
-    <Card className={classNames}>
+    <Card className={classNames} {...props}>
       <Card.Header as="h5" className="text-center">
         {title}
       </Card.Header>

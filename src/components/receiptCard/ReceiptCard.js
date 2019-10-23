@@ -5,7 +5,7 @@ import { Invoice } from "../../logic/CalculateInvoice";
 import Alert from "react-bootstrap/Alert";
 
 const CustomReceipt = ({ seats, title, type = "individual" }) => {
-  const showId = Object.keys(seats)[0];
+  const showId = Object.keys(seats).length === 1 && Object.keys(seats)[0];
   const bookedSeats = seats[showId];
 
   let newInVoice = new Invoice(seats);
@@ -17,18 +17,45 @@ const CustomReceipt = ({ seats, title, type = "individual" }) => {
     Total: newInVoice.total
   };
 
+  const showAlert = () => {
+    let component;
+    if (type === "individual") {
+      if (bookedSeats.length > 0) {
+        component = (
+          <Alert variant={"success"}>
+            Successfully booked : seats {bookedSeats.join(", ")} for {showId}
+          </Alert>
+        );
+      } else {
+        component = <Alert variant={"warning"}>No seats are selected.</Alert>;
+      }
+    }
+
+    if (type === "theater") {
+      const bookedSeats = newInVoice.allSelectedSeats;
+      if (bookedSeats.length <= 0) {
+        component = (
+          <Alert variant={"warning"}>No seats are sold yet. Goodluck!</Alert>
+        );
+      }
+    }
+    return component;
+  };
+
   return (
     <CustomCard title={title}>
-      {bookedSeats.length > 0 && type === "individual" ? (
-        <Alert variant={"success"}>
-          Successfully booked : seats {bookedSeats.join(", ")} for {showId}
-        </Alert>
-      ) : (
-        <Alert variant={"warning"}>No seats are selected.</Alert>
-      )}
+      {showAlert()}
       <CustomTable rowData={rowData} />
     </CustomCard>
   );
 };
 
 export default CustomReceipt;
+
+//{bookedSeats.length > 0 && type === "individual" ? (
+//<Alert variant={"success"}>
+//Successfully booked : seats {bookedSeats.join(", ")} for {showId}
+//</Alert>
+//) : (
+//<Alert variant={"warning"}>No seats are selected.</Alert>
+//)}

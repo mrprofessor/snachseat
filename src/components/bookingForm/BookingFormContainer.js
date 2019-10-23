@@ -31,9 +31,14 @@ const BookingFormContainer = ({
     setShowReceipt(false);
   };
 
+  const resetSelectedShow = () => {
+    setSelectedShow(Object.keys(seatsMap)[0]);
+  };
+
   const handleModalClose = () => {
     onReceiptClose();
     handleCloseReceiptView();
+    resetSelectedShow();
     onCloseBookModal();
   };
 
